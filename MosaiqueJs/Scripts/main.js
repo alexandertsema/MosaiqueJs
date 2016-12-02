@@ -6,59 +6,70 @@ document.onreadystatechange = () => {
   }
 };
 
-var cellWidth = 100;
+var cellWidth = 150;
 
 function generateSegments() {
 	
 	var main = document.getElementById("main");
-	
-	for (var i = 45 - 1; i >= 0; i--) {
+	var i = 1;
+	for (var i = 18 - 1; i >= 0; i--) {
 		 
 		var container = document.createElement("DIV");   
 		container.className = "container";
-		container.id=i;
+		container.id = i;
 
-		//3
-		var innerNode3 = document.createElement("CANVAS");
-		innerNode3.className = "cell";
-		innerNode3.width=innerNode3.height = cellWidth;
-		// innerNode3.id=i;
-		var ctx = innerNode3.getContext("2d");
+		//1
+		var innerNode1 = document.createElement("CANVAS");
+		innerNode1.className = "cell";
+		innerNode1.width = innerNode1.height = cellWidth;
+		innerNode1.id=1;
+		var ctx = innerNode1.getContext("2d");
+		ctx.beginPath();
+		ctx.arc(0, 0, 75, 0, 0.5*Math.PI);
+		ctx.stroke();
 		ctx.beginPath();
 		ctx.arc(cellWidth, cellWidth, 75, Math.PI, 1.5*Math.PI);
-		ctx.stroke();
-
-		//4
-		var innerNode4 = document.createElement("CANVAS");
-		innerNode4.className = "cell";
-		innerNode4.width=innerNode4.height = cellWidth;
-		// innerNode4.id=i;
-		var ctx = innerNode4.getContext("2d");
-		ctx.beginPath();
-		ctx.arc(0, cellWidth, 75,  1.5*Math.PI, 0);
 		ctx.stroke();
 
 		//2
 		var innerNode2 = document.createElement("CANVAS");
 		innerNode2.className = "cell";
-		innerNode2.width=innerNode2.height = cellWidth;
-		// innerNode2.id=i;
+		innerNode2.width = innerNode2.height = cellWidth;
+		innerNode2.id=2;
 		var ctx = innerNode2.getContext("2d");
 		ctx.beginPath();
 		ctx.arc(cellWidth, 0, 75, 0.5*Math.PI, Math.PI);
 		ctx.stroke();
+		ctx.beginPath();
+		ctx.arc(0, cellWidth, 75,  1.5*Math.PI, 0);
+		ctx.stroke();
 
-		//1
-		var innerNode1 = document.createElement("CANVAS");
-		innerNode1.className = "cell";
-		innerNode1.width=innerNode1.height = cellWidth;
-		// innerNode1.id=i;
-		var ctx = innerNode1.getContext("2d");
+		//3
+		var innerNode3 = document.createElement("CANVAS");
+		innerNode3.className = "cell";
+		innerNode3.width = innerNode3.height = cellWidth;
+		innerNode3.id=3;
+		var ctx = innerNode3.getContext("2d");
+		ctx.beginPath();
+		ctx.arc(cellWidth, cellWidth, 75, Math.PI, 1.5*Math.PI);
+		ctx.stroke();
 		ctx.beginPath();
 		ctx.arc(0, 0, 75, 0, 0.5*Math.PI);
 		ctx.stroke();
 
-		
+		//4
+		var innerNode4 = document.createElement("CANVAS");
+		innerNode4.className = "cell";
+		innerNode4.width = innerNode4.height = cellWidth;
+		innerNode4.id=4;
+		var ctx = innerNode4.getContext("2d");
+		ctx.beginPath();
+		ctx.arc(0, cellWidth, 75,  1.5*Math.PI, 0);
+		ctx.stroke();
+		ctx.beginPath();
+		ctx.arc(cellWidth, 0, 75, 0.5*Math.PI, Math.PI);
+		ctx.stroke();
+
 		container.appendChild(innerNode3);
 		container.appendChild(innerNode4);
 		container.appendChild(innerNode2);
@@ -85,36 +96,92 @@ function rotate() {
 			var canvasWidth = canvasHeight = cellWidth;
 			// Clear the canvas
 			context.clearRect(0, 0, canvasWidth, canvasHeight);
-
 			// Move registration point to the center of the canvas
 			context.translate(canvasWidth/2, canvasWidth/2);
 			
-			if (i % 2 == 0) {
-				// Rotate 1 degree
-				context.rotate(0.25*Math.PI);
-			}
-			else{
-				// Rotate 1 degree
-				context.rotate(-0.25*Math.PI);///180
-			}
+			//rotation rules
+			context.rotate(getRotationAngle(i, j))
+			// if (i % 2 == 0) {
+			// 	if (j==0) {
+			// 		context.rotate(-2*Math.PI);
+			// 	}
+			// 	if (j==1) {
+			// 		context.rotate(-1.5*Math.PI);
+			// 	}
+			// 	if (j==2) {
+			// 		context.rotate(2*Math.PI);
+			// 	}
+			// 	if (j==3) {
+			// 		context.rotate(-0.5*Math.PI);
+			// 	}
+			// }
+			// else{
+			// 	if (j==0) {
+			// 		context.rotate(0.5*Math.PI);
+			// 	}
+			// 	if (j==1) {
+			// 		context.rotate(-1.5*Math.PI);
+			// 	}
+			// 	if (j==2) {
+			// 		context.rotate(Math.PI);
+			// 	}
+			// 	if (j==3) {
+			// 		context.rotate(1.5*Math.PI);
+			// 	}
+			// }
 			
 			// Move registration point back to the top left corner of canvas
 			context.translate(-canvasWidth/2, -canvasWidth/2);
 
-			context.beginPath();
-			
-			if (j==0) 	   {context.arc(cellWidth, cellWidth, 75, Math.PI, 1.5*Math.PI);}
-			else if (j==1) {context.arc(0, cellWidth, 75,  1.5*Math.PI, 0);}
-			else if (j==2) {context.arc(cellWidth, 0, 75, 0.5*Math.PI, Math.PI);}
-			else if (j==3) {context.arc(0, 0, 75, 0, 0.5*Math.PI);}
-			
-
-			context.stroke();
+			// redraw
+			if (j==0) 	   {
+				context.beginPath();
+				context.arc(cellWidth, cellWidth, 75, Math.PI, 1.5*Math.PI);
+				context.stroke();
+				context.beginPath();
+				context.arc(0, 0, 75, 0, 0.5*Math.PI);
+				context.stroke();
+			}
+			else if (j==1) {
+				context.beginPath();
+				context.arc(0, cellWidth, 75,  1.5*Math.PI, 0);
+				context.stroke();
+				context.beginPath();
+				context.arc(cellWidth, 0, 75, 0.5*Math.PI, Math.PI);
+				context.stroke();
+			}
+			else if (j==2) {
+				context.beginPath();
+				context.arc(cellWidth, 0, 75, 0.5*Math.PI, Math.PI);
+				context.stroke();
+				context.beginPath();
+				context.arc(0, cellWidth, 75,  1.5*Math.PI, 0);
+				context.stroke();
+			}
+			else if (j==3) {
+				context.beginPath();
+				context.arc(0, 0, 75, 0, 0.5*Math.PI);
+				context.stroke();
+				context.beginPath();
+				context.arc(cellWidth, cellWidth, 75, Math.PI, 1.5*Math.PI);
+				context.stroke();
+			}
 		}
 	}
 }
 
+function getRotationAngle(i, j) {
+
+	var TO_RADIANS = Math.PI/180;
+	var angles = [0, 45, 90, 135, 180, 225, 270]
+	// var angles = [0, 7/4*Math.PI, 3/2*Math.PI, 5/4*Math.PI, Math.PI, 3/4*Math.PI, Math.PI/2]
+	var index = Math.floor(Math.random() * 6) + 0;
+	var isPositiv = Math.floor(Math.random() * 1) + 0;
+
+	return (isPositiv-1)*angles[index]*TO_RADIANS;
+}
+
 function rotate_start() {
-	// setInterval(rotate, 1000);
-	rotate();
+	setInterval(rotate, 1000);
+	//rotate();
 }

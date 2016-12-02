@@ -6,10 +6,12 @@ html, body{
 .cell{
 	float: left;
 	clear: right;
+	border: 1px solid green;
 }
 
 .container{
-	width: 200px;
+	width: 305px;
 	float: left;
 	clear: right;
+	border: 1px solid red;
 }
