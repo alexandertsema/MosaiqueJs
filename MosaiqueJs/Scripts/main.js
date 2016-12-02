@@ -101,35 +101,7 @@ function rotate() {
 			
 			//rotation rules
 			context.rotate(getRotationAngle(i, j))
-			// if (i % 2 == 0) {
-			// 	if (j==0) {
-			// 		context.rotate(-2*Math.PI);
-			// 	}
-			// 	if (j==1) {
-			// 		context.rotate(-1.5*Math.PI);
-			// 	}
-			// 	if (j==2) {
-			// 		context.rotate(2*Math.PI);
-			// 	}
-			// 	if (j==3) {
-			// 		context.rotate(-0.5*Math.PI);
-			// 	}
-			// }
-			// else{
-			// 	if (j==0) {
-			// 		context.rotate(0.5*Math.PI);
-			// 	}
-			// 	if (j==1) {
-			// 		context.rotate(-1.5*Math.PI);
-			// 	}
-			// 	if (j==2) {
-			// 		context.rotate(Math.PI);
-			// 	}
-			// 	if (j==3) {
-			// 		context.rotate(1.5*Math.PI);
-			// 	}
-			// }
-			
+						
 			// Move registration point back to the top left corner of canvas
 			context.translate(-canvasWidth/2, -canvasWidth/2);
 
@@ -174,14 +146,43 @@ function getRotationAngle(i, j) {
 
 	var TO_RADIANS = Math.PI/180;
 	var angles = [0, 45, 90, 135, 180, 225, 270]
-	// var angles = [0, 7/4*Math.PI, 3/2*Math.PI, 5/4*Math.PI, Math.PI, 3/4*Math.PI, Math.PI/2]
 	var index = Math.floor(Math.random() * 6) + 0;
 	var isPositiv = Math.floor(Math.random() * 1) + 0;
+	var angle;
 
-	return (isPositiv-1)*angles[index]*TO_RADIANS;
+	if (i % 2 == 0) {
+		if (j==0) {
+			angle = 90;
+		}
+		else if (j==1) {
+			angle = 180;
+		}
+		else if (j==2) {
+			angle = 90;
+		}
+		else if (j==3) {
+			angle = 180;
+		}
+	}
+	else {
+		if (j==0) {
+			angle = -90;
+		}
+		else if (j==1) {
+			angle = -180;
+		}
+		else if (j==2) {
+			angle = -90;
+		}
+		else if (j==3) {
+			angle = -180;
+		}
+	}
+
+	return angle*TO_RADIANS;
 }
 
 function rotate_start() {
-	setInterval(rotate, 1000);
-	//rotate();
+	//setInterval(rotate, 1000);
+	rotate();
 }
