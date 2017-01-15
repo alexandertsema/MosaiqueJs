@@ -3,15 +3,40 @@ html, body{
 	height: 100%;
 }
 
+.container{
+	float: left;
+	clear: right;
+}
+
 .cell{
 	float: left;
 	clear: right;
-	border: 1px solid green;
+    
+    
+    /*-moz-animation:spin 4s linear ;
+    animation:spin 4s linear ;*/
 }
 
-.container{
-	width: 305px;
+.rotate{
 	float: left;
 	clear: right;
-	border: 1px solid red;
+
+	-webkit-animation:spin 1s linear;
 }
+
+/*@-moz-keyframes spin { 
+	100% { 
+		-moz-transform: rotate(90deg); 
+		} 
+	}*/
+@-webkit-keyframes spin { 
+	to { 
+		-webkit-transform: rotate(90deg); 
+		} 
+	}
+/*@keyframes spin { 
+	100% { 
+		-webkit-transform: rotate(90deg); 
+		transform:rotate(90deg); 
+		}
+	 }*/
