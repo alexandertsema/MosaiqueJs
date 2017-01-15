@@ -2,7 +2,7 @@
 
 ## Overview
 
-This projects is just for fun (:
+This project is just for fun (:
 
 ## Tech stack
 
